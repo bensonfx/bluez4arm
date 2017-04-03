@@ -1,0 +1,11 @@
+*.o
+*.o.cmd
+*.pc
+.tags
+tags
+.cscope.*
+cscope.*
+src
+deps
+data
+out

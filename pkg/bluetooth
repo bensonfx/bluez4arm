@@ -1,0 +1,51 @@
+#!/bin/sh
+
+kill_proc()
+{
+    local pid=$(pidof $1)
+    [ -n "$pid" ] && kill -9 $pid
+}
+
+power_bluez()
+{
+    case $1 in
+        on)
+            #init bluetooth
+            [ -z "$(pidof $bt_uart)" ] && $bt_uart -s 115200 ttyAMA1 rtk_h5
+            hciconfig hci0 up
+            [ -d $var_dir ] || mkdir -p $var_dir
+            ;;
+        off)
+            hciconfig hci0 down
+            local pid=$(pidof $bt_uart)
+            [ -n "$pid" ] && kill -9 $pid
+}
+
+kill_bluez()
+{
+    kill_proc $dbus
+    kill_proc $bluez
+    power_bluez off
+}
+
+start_bluez()
+{
+    power_bluez on
+    [ -z "$(ps|grep -v grep|grep $dbus)" ] && $dbus --system --nopidfile
+    [ -z "$(ps|grep -v grep|grep $bluez)" ] && $bluez &
+}
+
+dbus=dbus-daemon
+bluez=bluetoothd
+bt_uart=rtk_hciattach
+var_dir="/var/run/dbus"
+
+case $1 in
+        on)
+            start_bluez;;
+        off)
+            kill_bluez;;
+        *)
+            echo "usage: $(basename $0) on/off -->open/shutdown bluez stack"
+esac
+
