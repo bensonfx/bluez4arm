@@ -26,7 +26,7 @@ DEPS_DESTDIR		:= $(TOP)/deps
 BLUEZ_DESTDIR		:= $(TOP)/bluez
 lite				:= $(TOP)/out
 
-BLUEZ_DEPS_LIBS		:= libexpat.so.1 libreadline.so.7 libglib-2.0.so.0 libpcre.so.1 libbluetooth.so.3
+BLUEZ_DEPS_LIBS		:= libexpat.so.1 libreadline.so.7 libglib-2.0.so.0 libpcre.so.1
 BLUEZ_PROFILE		:= src/main.conf profiles/network/network.conf profiles/input/input.conf
 BLUEZ_PROFILE_DIR	:= /etc/bluetooth
 BLUEZ_PROFILE_DIST  := $(BLUEZ_DESTDIR)$(PREFIX)$(BLUEZ_PROFILE_DIR)
