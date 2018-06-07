@@ -33,7 +33,7 @@ DBUS_PARAMS			:= $(EXTRA_FLAGS) --prefix=$(PREFIX) --localstatedir=/var --with-d
 						--with-x=no --enable-epoll
 DBUS_INSTFLAG		:= DESTDIR=$(DBUS_DESTDIR)
 
-BLUEZ				:= bluez-5.49
+BLUEZ				:= bluez-5.50
 BLUEZ_PARAMS		:= $(EXTRA_FLAGS) --prefix=$(PREFIX) PKG_CONFIG_PATH=$(DEPS_DESTDIR)/lib/pkgconfig \
 						--with-dbusconfdir=$(DBUS_CONF) \
 						--disable-systemd --disable-udev \
