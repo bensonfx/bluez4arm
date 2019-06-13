@@ -14,7 +14,11 @@ define build_mod
 	popd
 endef
 
-Q					:= @
+Q                   := @
+ifeq ($(V),1)
+Q                   :=
+endif
+
 product				:= hi3559
 -include product.mk
 
